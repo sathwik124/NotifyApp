@@ -1,6 +1,9 @@
 package com.example.notify;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +15,14 @@ import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Profile extends AppCompatActivity {
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
     TextView name,mail;
     Button logout;
     @Override
@@ -40,5 +47,16 @@ public class Profile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+       drawerLayout=findViewById(R.id.drawer_layout);
+       navigationView=findViewById(R.id.nav_view);
+       toolbar=findViewById(R.id.toolbar);
+
+       setSupportActionBar(toolbar);
+
+       ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_open,R.string.navigation_close);
+
+       drawerLayout.addDrawerListener(toggle);
+       toggle.syncState();
     }
 }
