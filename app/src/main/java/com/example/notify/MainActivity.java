@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = mAuth.getCurrentUser();
         if(user!=null){
-            Intent intent = new Intent(getApplicationContext(), Profile.class);
+            Intent intent = new Intent(getApplicationContext(), Profile1.class);
             startActivity(intent);
         }
     }
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(getApplicationContext(),Profile.class);
+                            Intent intent = new Intent(getApplicationContext(),Profile1.class);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
