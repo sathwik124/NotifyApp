@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Notify">
         <activity
+            android:name=".add"
+            android:exported="true" />
+        <activity
             android:name=".Profile1"
             android:exported="true"
             android:label="@string/title_activity_profile1"

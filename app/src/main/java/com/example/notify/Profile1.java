@@ -1,5 +1,6 @@
 package com.example.notify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -33,6 +34,7 @@ public class Profile1 extends AppCompatActivity {
 
         binding = ActivityProfile1Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        addUser();
 
         setSupportActionBar(binding.appBarProfile1.toolbar);
 
@@ -42,8 +44,8 @@ public class Profile1 extends AppCompatActivity {
         binding.appBarProfile1.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(),add.class);
+                startActivity(intent);
             }
         });
         DrawerLayout drawer = binding.drawerLayout;
@@ -81,8 +83,15 @@ public class Profile1 extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView name = headerView.findViewById(R.id.name);
         TextView mail = headerView.findViewById(R.id.mail);
-        name.setText(currentUser.getDisplayName());
+        name.setText(new StringBuilder().append("Hi ").append(currentUser.getDisplayName()).toString());
         mail.setText(currentUser.getEmail());
+
+    }
+
+    public void addUser(){
+
+
+
 
     }
 
