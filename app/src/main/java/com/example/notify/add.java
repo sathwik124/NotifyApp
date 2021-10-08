@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -34,10 +36,10 @@ public class add extends AppCompatActivity {
     }
     public void add_data(){
         String s = txt.getText().toString();
-        String ph = MainActivity.p;
+        String str = FirebaseAuth.getInstance().getCurrentUser().getUid();
         refer = FirebaseDatabase.getInstance().getReference("users");
-        String key = refer.child(ph).push().getKey();
-        refer.child(ph).child(key).setValue(s).addOnSuccessListener(new OnSuccessListener<Void>() {
+        String key = refer.child(str).push().getKey();
+        refer.child(str).child(key).setValue(s).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(add.this,"Successfully added",Toast.LENGTH_SHORT).show();

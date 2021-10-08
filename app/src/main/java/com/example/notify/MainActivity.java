@@ -37,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
-    public static String p;
-    EditText editText;
-    Button button;
-    DatabaseReference reference;
     @Override
     protected void onStart() {
         super.onStart();
@@ -64,27 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 signIn();
             }
         });
-        editText = findViewById(R.id.phone);
-        button = findViewById(R.id.google_signIn);
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                boolean isReady = editText.getText().toString().length() == 10;
-                button.setEnabled(isReady);
-
-            }
-        });
     }
 
     private void createRequest() {
@@ -104,13 +80,6 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    public void setUser(FirebaseUser user){
-
-        p = editText.getText().toString();
-        reference = FirebaseDatabase.getInstance().getReference("users");
-        reference.child(p).child("1").setValue(user.getEmail());
-
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -138,8 +107,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            setUser(user);
                             Intent intent = new Intent(getApplicationContext(),Profile1.class);
                             startActivity(intent);
                         } else {
