@@ -50,5 +50,6 @@ public class add extends AppCompatActivity {
                 Toast.makeText(add.this,"failed to add!!",Toast.LENGTH_SHORT).show();
             }
         });
+        txt.setText(null);
     }
 }
