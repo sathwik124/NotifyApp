@@ -34,7 +34,6 @@ public class Profile1 extends AppCompatActivity {
 
         binding = ActivityProfile1Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        addUser();
 
         setSupportActionBar(binding.appBarProfile1.toolbar);
 
@@ -88,11 +87,6 @@ public class Profile1 extends AppCompatActivity {
 
     }
 
-    public void addUser(){
 
-
-
-
-    }
 
 }

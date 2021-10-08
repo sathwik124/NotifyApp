@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -25,13 +29,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
-
+    public static String p;
+    EditText editText;
+    Button button;
+    DatabaseReference reference;
     @Override
     protected void onStart() {
         super.onStart();
@@ -55,6 +64,27 @@ public class MainActivity extends AppCompatActivity {
                 signIn();
             }
         });
+        editText = findViewById(R.id.phone);
+        button = findViewById(R.id.google_signIn);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                boolean isReady = editText.getText().toString().length() == 10;
+                button.setEnabled(isReady);
+
+            }
+        });
     }
 
     private void createRequest() {
@@ -72,6 +102,14 @@ public class MainActivity extends AppCompatActivity {
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    public void setUser(FirebaseUser user){
+
+        p = editText.getText().toString();
+        reference = FirebaseDatabase.getInstance().getReference("users");
+        reference.child(p).child("1").setValue(user.getEmail());
+
     }
 
     @Override
@@ -101,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
+                            setUser(user);
                             Intent intent = new Intent(getApplicationContext(),Profile1.class);
                             startActivity(intent);
                         } else {
