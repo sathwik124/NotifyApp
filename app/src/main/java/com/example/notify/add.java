@@ -30,6 +30,8 @@ public class add extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                btn.setEnabled(false);
                 add_data();
             }
         });
@@ -43,11 +45,13 @@ public class add extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(add.this,"Successfully added",Toast.LENGTH_SHORT).show();
+                btn.setEnabled(true);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(add.this,"failed to add!!",Toast.LENGTH_SHORT).show();
+                btn.setEnabled(true);
             }
         });
         txt.setText(null);

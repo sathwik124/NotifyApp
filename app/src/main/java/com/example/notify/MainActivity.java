@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         if(user!=null){
             Intent intent = new Intent(getApplicationContext(), Profile1.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -105,5 +106,11 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+        super.onBackPressed();
     }
 }

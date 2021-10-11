@@ -27,5 +27,6 @@
         android:text="ADD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_ed" />
+        app:layout_constraintTop_toBottomOf="@+id/text_ed"
+        android:enabled="true"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
