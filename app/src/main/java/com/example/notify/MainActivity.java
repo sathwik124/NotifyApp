@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
+    loader load;
     @Override
     protected void onStart() {
         super.onStart();
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         createRequest();
+        load = new loader(MainActivity.this);
         findViewById(R.id.google_signIn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void signIn() {
+        load.startLoadingDialog();
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
+                load.dismissDialog();
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
@@ -97,10 +101,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            load.dismissDialog();
                             Intent intent = new Intent(getApplicationContext(),Profile1.class);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
+                            load.dismissDialog();
                             Toast.makeText(MainActivity.this, "Sorry authentication is failed!", Toast.LENGTH_SHORT).show();
 
                         }
