@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "824950136764",
+    "firebase_url": "https://notify-37453-default-rtdb.firebaseio.com",
     "project_id": "notify-37453",
     "storage_bucket": "notify-37453.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "824950136764-qrjqhm0vtssj6lqi5eu3olff7um1oosn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.notify",
+            "certificate_hash": "f219b09b74b79c12d9eed28a97fd4ca0c09e4331"
+          }
+        },
         {
           "client_id": "824950136764-qi14608osgk9e8pvn07etb4k66g9b22b.apps.googleusercontent.com",
           "client_type": 3
