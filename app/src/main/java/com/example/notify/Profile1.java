@@ -34,7 +34,7 @@ public class Profile1 extends AppCompatActivity {
 
         binding = ActivityProfile1Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        startService(new Intent(this,mailcall.class));
         setSupportActionBar(binding.appBarProfile1.toolbar);
 
         mAuth = FirebaseAuth.getInstance();
