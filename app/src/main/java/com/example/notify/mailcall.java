@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.os.IBinder;
 
 public class mailcall extends Service {
-    public mailcall() {
-    }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(Intent intent, int flags, int startId){
         onTaskRemoved(intent);
 
 
@@ -24,6 +22,9 @@ public class mailcall extends Service {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
+        Intent restartServiceIntent = new Intent(getApplicationContext(),this.getClass());
+        restartServiceIntent.setPackage(getPackageName());
+        startService(restartServiceIntent);
         super.onTaskRemoved(rootIntent);
     }
 }
