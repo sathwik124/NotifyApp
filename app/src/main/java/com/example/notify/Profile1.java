@@ -25,6 +25,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,10 +38,11 @@ public class Profile1 extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
-    String accessToken;
-    String refreshToken;
 
     private RequestQueue mQueue;
+    public JSONObject jso;
+    public static String access;
+    public static String refresh;
 
 
     @Override
@@ -107,7 +111,15 @@ public class Profile1 extends AppCompatActivity {
         StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println(response);
+                try {
+                    jso = new JSONObject(response);
+                    access = jso.getString("access_token");
+                    refresh = jso.getString("refresh_token");
+                    System.out.println("success ra mama");
+                    System.out.println(access);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -123,7 +135,7 @@ public class Profile1 extends AppCompatActivity {
 
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("code","4/1AX4XfWgNMNjRyAhWWsSMPCR_3TEKWVWUi4dOw8FK9guwGa-qRmrFGJ_e4pU");
+                params.put("code","4/1AX4XfWiu3P2TH6mnUczklCjCytD3O5pTdaIeJzDcPZQezDKqi-KNBsBNpRU");
                 params.put("client_id","824950136764-qrjqhm0vtssj6lqi5eu3olff7um1oosn.apps.googleusercontent.com" );
                 params.put("redirect_uri","urn:ietf:wg:oauth:2.0:oob");
                 params.put("grant_type","authorization_code");
